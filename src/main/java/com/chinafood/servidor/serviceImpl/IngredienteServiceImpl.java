@@ -11,12 +11,12 @@ import com.chinafood.servidor.repository.IngredienteRepository;
 public class IngredienteServiceImpl extends ICRUDImpl<Ingrediente, Integer>{
 
 	@Autowired
-	private IngredienteRepository repository;
+	private IngredienteRepository ingredienteRepository;
 	
 	@Override
 	public JpaRepository<Ingrediente, Integer> getRepository() {
-		// TODO Auto-generated method stub
-		return repository;
+		
+		return ingredienteRepository;
 	}
 
 }

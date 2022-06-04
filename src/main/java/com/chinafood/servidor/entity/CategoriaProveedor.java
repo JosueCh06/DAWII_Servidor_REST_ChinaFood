@@ -20,7 +20,7 @@ public class CategoriaProveedor implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_categoriaP")
-	private int idCategoriaP;
+	private Integer idCategoriaP;
 	
 	@Column(name="desc_categoriaP")
 	private String descripcionCategoriaP;

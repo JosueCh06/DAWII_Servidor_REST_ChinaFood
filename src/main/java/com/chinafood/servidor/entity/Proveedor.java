@@ -20,7 +20,7 @@ public class Proveedor  implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_proveedor")
-	private int idProveedor;
+	private Integer idProveedor;
 	
 	@Column(name = "nomb_proveedor")
 	private String nombre;

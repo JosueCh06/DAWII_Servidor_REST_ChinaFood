@@ -23,7 +23,7 @@ public class Platillo implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_platillo")
-	private int idPlatillo;
+	private Integer idPlatillo;
 	
 	@Column(name = "desc_platillo")
 	private String descripcion;
@@ -38,10 +38,7 @@ public class Platillo implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "platillo")
 	private List<IngredientePlatillo> listaIngredientePlatillo;
-	
-	@Column(name = "rutaImagen")
-	private String linkImagen;
-	
+		
 	@JsonIgnore
 	@OneToMany(mappedBy = "platillo")
 	private List<PlatilloHasBoleta> listaPlatilloHasBoleta;
@@ -97,19 +94,5 @@ public class Platillo implements Serializable{
 	public void setListaIngredientePlatillo(List<IngredientePlatillo> listaIngredientePlatillo) {
 		this.listaIngredientePlatillo = listaIngredientePlatillo;
 	}
-
-	public String getLinkImagen() {
-		return linkImagen;
-	}
-
-	public void setLinkImagen(String linkImagen) {
-		this.linkImagen = linkImagen;
-	}
-
-	
-
-	
-
-	
 		
 }

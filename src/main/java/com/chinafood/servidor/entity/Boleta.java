@@ -25,7 +25,7 @@ public class Boleta implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="num_bol")
-	private int numeroBoleta;
+	private Integer numeroBoleta;
 	
 	@ManyToOne
 	@JoinColumn(name = "cod_usu")

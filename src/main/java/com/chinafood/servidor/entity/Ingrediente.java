@@ -22,7 +22,7 @@ public class Ingrediente implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ingrediente")
-	private int idIngrediente;
+	private Integer idIngrediente;
 	
 	@Column(name = "desc_ingrediente")
 	private String descripcion;

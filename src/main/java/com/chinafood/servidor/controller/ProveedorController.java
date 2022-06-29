@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 
 import com.chinafood.servidor.entity.Proveedor;
 import com.chinafood.servidor.serviceImpl.ProveedorServiceImpl;
@@ -35,22 +36,37 @@ public class ProveedorController {
 	//select *from tabla where campo1=?
 		//convierte a JSON
 		@GetMapping("/buscar/{codigo}")
-		public Proveedor buscar(@PathVariable("codigo") Integer cod) throws Exception{
-			return proveedorService.buscarPorId(cod);     
+		public ResponseEntity<Proveedor> buscar(@PathVariable("codigo") int cod) throws Exception{
+			Proveedor prov=proveedorService.buscarPorId(cod);
+			if(prov==null)
+				throw new NotFoundException();
+			return new ResponseEntity<>(prov,HttpStatus.OK);
 		}
 		//insert into tabla values(?,?,?,?)
 		@PostMapping("/registrar")
-		public void registrar(@RequestBody Proveedor prov)throws Exception{
-			proveedorService.registrar(prov);         
+		public ResponseEntity<Proveedor> registrar(@RequestBody Proveedor prov)throws Exception{
+			Proveedor p=proveedorService.registrar(prov);  
+			return new ResponseEntity<>(p,HttpStatus.CREATED);
+			
 		}
 		//update tabla set campo1=?,campo2=? where campon=?
 		@PutMapping("/actualizar")
-		public void actualizar(@RequestBody Proveedor prov) throws Exception{
-			proveedorService.actualizar(prov);
+		public ResponseEntity<Proveedor> actualizar(@RequestBody Proveedor prov) throws Exception{
+			Proveedor p=proveedorService.buscarPorId(prov.getIdProveedor());
+			if(p==null)
+				throw new NotFoundException();
+			else
+				p=proveedorService.actualizar(prov);
+			return new ResponseEntity<>(prov,HttpStatus.OK);
 		}
 		//delete from tabla where campon=?
 		@DeleteMapping("/eliminar/{codigo}")
-		public void eliminar(@PathVariable("codigo") Integer cod) throws Exception{
-			proveedorService.eliminar(cod);
+		public ResponseEntity<Proveedor> eliminar(@PathVariable("codigo") int cod) throws Exception{
+			Proveedor p=proveedorService.buscarPorId(cod);
+			if(p==null)
+				throw new NotFoundException();
+			else
+				proveedorService.eliminar(cod);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
 }
